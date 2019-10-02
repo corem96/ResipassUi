@@ -6,8 +6,9 @@
         <b-navbar-brand to="/">Colonia Segura</b-navbar-brand>
         <b-collapse is-nav id="nav-collapse">
           <b-navbar-nav>
-            <b-nav-item href="#" @click.prevent="login" v-if="!user">Login</b-nav-item>
-            <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item>
+            <router-link to="/login">Login</router-link>
+            <!-- <b-nav-item href="#" @click.prevent="login" v-if="!user">Login</b-nav-item> -->
+            <!-- <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item> -->
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -25,14 +26,6 @@
     data () {
       return {
         usuario: null
-      }
-    },
-    methods: {
-      login () {
-
-      },
-      async logout () {
-
       }
     }
   }
