@@ -1,29 +1,23 @@
-# resipass.ui
+# Resipass.UI
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
+## Ubicación de repositorio
+Para mejor experiencia, es necesario ubicar el repositorio dos niveles por encima del repositorio de backend.
+En caso de no poder servirse desde backend puede ejecutarse de forma local corriendo el comando:
 ```
 yarn run serve
 ```
 
-### Compiles and minifies for production
+### Setup del proyecto
+```
+yarn install
+```
+
+### Compilación y ejecución local
+```
+yarn run serve
+```
+
+### Compilación y minificación
 ```
 yarn run build
 ```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
