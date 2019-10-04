@@ -2,14 +2,16 @@
 import axios from 'axios';
 import { server } from '../../helper';
 
-function login(nombreUsuario, password) {
+function login(datosLogin) {
+  const { nombreUsuario, password, esAdmin } = datosLogin;
   return axios({
     method: 'post',
-    headers: {'Content-Typ': 'application/json'},
+    headers: {'Content-Type': 'application/json'},
     url: `${server.baseUrl}/api/usuario/login`,
     data: {
       nombreUsuario: nombreUsuario,
-      password: password
+      password: password,
+      esUsuarioAdmin: esAdmin
     },
   }).then(resp => {
       const usuario = resp.data;
