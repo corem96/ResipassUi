@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
           <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="checkadmin" v-model="esAdmin" />
+            <input type="checkbox" class="form-check-input" id="checkadmin" v-model="esUsuarioAdmin" />
             <label class="form-check-label" for="checkadmin">Soy administrador</label>
           </div>
         </div>
@@ -45,7 +45,7 @@ export default {
     return {
       nombreUsuario: "",
       password: "",
-      esAdmin: false,
+      esUsuarioAdmin: false,
       error: "",
       returnUrl: ""
     };
@@ -59,7 +59,7 @@ export default {
       let usuario = {
         nombreUsuario: this.nombreUsuario,
         password: this.password,
-        esAdmin: this.esAdmin
+        esUsuarioAdmin: this.esUsuarioAdmin
       };
       this._submit(usuario);
     },
