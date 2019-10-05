@@ -6,7 +6,7 @@
         <b-navbar-brand to="/">Colonia Segura</b-navbar-brand>
         <b-collapse is-nav id="nav-collapse">
           <b-navbar-nav>
-            <router-link to="/login">Login</router-link>
+            <!-- <router-link to="/login">Login</router-link> -->
             <!-- <b-nav-item href="#" @click.prevent="login" v-if="!user">Login</b-nav-item> -->
             <!-- <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item> -->
           </b-navbar-nav>

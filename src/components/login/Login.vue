@@ -22,20 +22,22 @@
           />
         </div>
         <div class="form-group">
-          <input type="checkbox" name="admin" id="admin">
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="checkadmin" v-model="esAdmin" />
+            <label class="form-check-label" for="checkadmin">Soy administrador</label>
+          </div>
         </div>
         <div class="form-group col-md-12">
           <button type="submit" class="btn btn-info">Entrar</button>
         </div>
+        <div v-if="error" class="alert alert-danger">{{error}}</div>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import { router } from "../../router";
-import { server } from "../../helper";
 import { servicioUsuario } from "../../servicios/usuario/ServicioUsuario";
 
 export default {
@@ -43,11 +45,14 @@ export default {
     return {
       nombreUsuario: "",
       password: "",
-      esAdmin: false
+      esAdmin: false,
+      error: "",
+      returnUrl: ""
     };
   },
   created() {
     servicioUsuario.logout();
+    this.returnUrl = this.$route.query.returnUrl || "/";
   },
   methods: {
     loginSubmit() {
@@ -59,16 +64,15 @@ export default {
       this._submit(usuario);
     },
     _submit(datos) {
-      servicioUsuario.login(datos).then(
-        usuario => {
-          if (usuario) {
-            router.push("/usuario");
-          }
-        },
-        error => {
-          this.error = error;
+      this.error = "";
+      servicioUsuario.login(datos)
+      .then(resp => {
+        if (!resp.error) {
+          router.push("/usuario");
+        } else {
+          this.error = resp.error;
         }
-      );
+      });
     }
   }
 };

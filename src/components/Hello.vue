@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{msg}}</h1>
-    <!-- <router-link to="/login" class="btn btn-info">Inicia sesión</router-link> -->
+    <router-link to="/login" class="btn btn-info">Inicia sesión</router-link>
   </div>
 </template>
 
