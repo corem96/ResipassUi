@@ -5,6 +5,7 @@ import Home from './views/Home.vue';
 import Login from './components/login/Login.vue';
 import Perfil from './components/usuario/Perfil.vue';
 import RegistroDomicilio from '@/components/usuario/registro/RegistroDomicilio.vue';
+import RegistroTarjeta from '@/components/usuario/registro/RegistroTarjeta.vue';
 
 Vue.use(Router);
 
@@ -20,6 +21,10 @@ export const router = new Router({
         {
           path: '/registrodom',
           component: RegistroDomicilio
+        },
+        {
+          path: '/registrotar',
+          component: RegistroTarjeta
         }
       ]
     },

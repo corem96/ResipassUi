@@ -9,7 +9,9 @@
           <li class="list-group-item">
             <router-link to="/registrodom">Registrar domicilio</router-link>
           </li>
-          <li class="list-group-item">Registrar tarjeta</li>
+          <li class="list-group-item">
+            <router-link to="/registrotar">Registrar tarjeta</router-link>
+          </li>
           <li class="list-group-item">Cobranza</li>
           <li class="list-group-item">Enviar recordatorio</li>
           <li class="list-group-item">
