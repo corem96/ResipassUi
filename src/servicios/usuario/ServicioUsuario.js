@@ -2,12 +2,13 @@
 import axios from 'axios';
 import { server } from '../../helper';
 
+const loginApi = `${server.baseUrl}/api/auth`;
+
 async function login(datosLogin) {
-  console.log(datosLogin);  
   try {
-    const resp = await axios.post(`${server.baseUrl}/api/auth`, datosLogin);
-    const usuario = resp.data;
-    if (usuario) {
+    const resp = await axios.post(loginApi, datosLogin);
+    if (resp) {
+      const usuario = resp.data;
       localStorage.setItem('usuario', JSON.stringify(usuario));
       return usuario;
     }
