@@ -15,7 +15,7 @@ async function registroDomicilio(datos) {
   } catch (error) {
     if (error.response) {
       const { data } = error.response;
-      return { error: data };
+      return { error: `Ocurrió un error al intentar guardar los datos: ${data}` };
     }
   }
 }
