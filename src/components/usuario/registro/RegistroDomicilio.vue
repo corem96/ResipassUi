@@ -57,13 +57,13 @@ export default {
     },
     _submit(datos) {
       servicioDomicilio.registroDomicilio(datos)
-      .then(resp => {
-        if (!resp.error) {
-          this.success = 'Domicilio registrado';
-        } else {
-          this.errors.push(resp.error);
-        }
-      });
+        .then(resp => {
+          if (!resp.error) {
+            this.success = 'Domicilio registrado';
+          } else {
+            this.errors.push(resp.error);
+          }
+        });
     },
     validaForm() {
       this.errors = [];
