@@ -12,6 +12,9 @@
           <li class="list-group-item">
             <router-link to="/registrotar">Registrar tarjeta</router-link>
           </li>
+          <li class="list-group-item">
+            <router-link to="/registroaviso">Registrar aviso</router-link>
+          </li>
           <li class="list-group-item">Cobranza</li>
           <li class="list-group-item">Enviar recordatorio</li>
           <li class="list-group-item">

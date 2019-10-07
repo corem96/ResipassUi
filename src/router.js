@@ -6,6 +6,7 @@ import Login from './components/login/Login.vue';
 import Perfil from './components/usuario/Perfil.vue';
 import RegistroDomicilio from '@/components/usuario/registro/RegistroDomicilio.vue';
 import RegistroTarjeta from '@/components/usuario/registro/RegistroTarjeta.vue';
+import RegistroAviso from '@/components/usuario/registro/RegistroAviso.vue';
 
 Vue.use(Router);
 
@@ -25,6 +26,10 @@ export const router = new Router({
         {
           path: '/registrotar',
           component: RegistroTarjeta
+        },
+        {
+          path: '/registroaviso',
+          component: RegistroAviso
         }
       ]
     },
