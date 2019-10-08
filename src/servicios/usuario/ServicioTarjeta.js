@@ -6,7 +6,6 @@ const tarjetaApi = `${server.baseUrl}/api/tarjeta`;
 
 async function registroTarjeta(datos) {
   try {
-    console.log(datos);
     const resp = await axios.post(tarjetaApi, datos);
     if (resp) { return resp.data; }
   } catch (error) {
@@ -17,4 +16,14 @@ async function registroTarjeta(datos) {
   }
 }
 
-export const servicioTarjeta = { registroTarjeta };
+async function obtenerTarjetas() {
+  try {
+    const resp = await axios.get(tarjetaApi);
+    if (resp) { return resp.data }
+  } catch (error) {
+    const { data } = error.response;
+    return { error: `Ocurrió un error al intentar obtener los datos: ${data}`};
+  }
+}
+
+export const servicioTarjeta = { registroTarjeta, obtenerTarjetas };
