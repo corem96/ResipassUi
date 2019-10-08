@@ -14,7 +14,6 @@ Vue.use(Router);
 
 export const router = new Router({
   mode: 'history',
-  // base: process.env.BASE_URL,
   routes: [
     { path: '/', redirect: { name: 'home' } },
     { path: '/home', name: 'home', component: Home },
@@ -36,12 +35,12 @@ export const router = new Router({
       ]
     },
     { path: '/residente', component: PerfilResidente,
-    children: [
-      {
-        path: '/tarjeta',
-        component: ConsultaTarjeta
-      }
-    ]
+      children: [
+        {
+          path: '/consultatarjeta',
+          component: ConsultaTarjeta
+        }
+      ]
     }
   ]
 });
