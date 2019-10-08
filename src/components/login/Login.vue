@@ -43,11 +43,11 @@ import { servicioUsuario } from "../../servicios/usuario/ServicioUsuario";
 export default {
   data() {
     return {
-      nombreUsuario: "",
-      password: "",
+      nombreUsuario: '',
+      password: '',
       esUsuarioAdmin: false,
-      error: "",
-      returnUrl: ""
+      error: '',
+      returnUrl: ''
     };
   },
   created() {
@@ -64,11 +64,13 @@ export default {
       this._submit(usuario);
     },
     _submit(datos) {
-      this.error = "";
+      this.error = '';
       servicioUsuario.login(datos)
       .then(resp => {
         if (!resp.error) {
-          router.push("/usuario");
+          resp.esUsuarioAdmin = datos.esUsuarioAdmin;
+          const ruta = datos.esUsuarioAdmin ? '/usuario' : '/residente'
+          router.push(ruta);
         } else {
           this.error = resp.error;
         }
