@@ -4,14 +4,9 @@
       <div class="row">
         <div class="com-md-12">
           <!-- <b-button @click="toggleBusy">Toggle Busy State</b-button> -->
-          <b-table striped hover :items="tarjetas"
-            :fields="[{key: 'id', label: '#'},'codigo', 'vigencia', 'activa']"
-            :busy="cargando" >
-            <template v-slot:table-busy>
-              <div class="text-center text-danger my-2">
-                <b-spinner class="align-middle"></b-spinner>
-                <strong>Loading...</strong>
-              </div>
+          <b-table striped hover responsive fixed :items="tarjetas" :fields="campos">
+            <template v-slot:cell(activa)="data">
+                {{ data.item.activa }} == true ? 'Activa' : 'Inactiva'
             </template>
           </b-table>
         </div>
@@ -36,12 +31,23 @@ export default {
     return {
       errors: [],
       success: '',
+      campos: [
+          {key: 'id', label: '#'},
+          'codigo',
+          { key: 'residenteNombreCompleto', label: 'Residente', class: 'largeColumn' },
+          { key: 'vigencia', formatter: value => {
+              let fecha = new Date(value)
+              let formatted_date = `${fecha.getDay()}/${fecha.getMonth()}/${fecha.getFullYear()}`
+              return formatted_date
+          }},
+          { key: 'activa', formatter: value => {
+              return value ? 'ACTIVA' : 'INACTIVA'
+          }}],
       tarjetas: [],
       cargando: false,
     };
   },
   created() {
-    this.toggleBusy();
     servicioTarjeta.obtenerTarjetas()
       .then(resp => {
         if (!resp.error) {
@@ -49,14 +55,13 @@ export default {
           } else {
             this.errors.push(resp.error);
           }
-          this.toggleBusy();
       });
-
-  },
-  methods: {
-    toggleBusy() {
-      this.cargando = !this.cargando
-    }
   }
 }
 </script>
+
+<style>
+.largeColumn {
+    width: 40%;
+}
+</style>
