@@ -67,12 +67,16 @@ export default {
       this.error = '';
       servicioUsuario.login(datos)
       .then(resp => {
-        if (!resp.error) {
+        if (resp && !resp.error) {
           resp.esUsuarioAdmin = datos.esUsuarioAdmin;
           const ruta = datos.esUsuarioAdmin ? '/usuario' : '/residente'
           router.push(ruta);
         } else {
-          this.error = resp.error;
+          if (resp) {
+            this.error = resp.error;
+          } else {
+            this.error = `Ocurrió un error al intentar comunicarse con el servidor. Intentelo más tarde.`;
+          }
         }
       });
     }
