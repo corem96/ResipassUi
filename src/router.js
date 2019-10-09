@@ -9,6 +9,7 @@ import RegistroTarjeta from '@/components/usuario/registro/RegistroTarjeta.vue';
 import RegistroAviso from '@/components/usuario/registro/RegistroAviso.vue';
 import PerfilResidente from '@/components/residente/Perfil.vue';
 import ConsultaTarjeta from '@/components/residente/consulta/ConsultaTarjeta.vue';
+import ConsultaAviso from '@/components/residente/consulta/ConsultaAviso.vue';
 
 Vue.use(Router);
 
@@ -39,6 +40,10 @@ export const router = new Router({
         {
           path: '/consultatarjeta',
           component: ConsultaTarjeta
+        },
+        {
+          path: '/consultaaviso',
+          component: ConsultaAviso
         }
       ]
     }

@@ -16,7 +16,7 @@
             Reporte de pagos por anualidad
           </li>
           <li class="list-group-item">
-            Consultar avisos/comunicados
+            <router-link to="/consultaaviso">Consultar avisos/comunicados</router-link>
           </li>
           <li class="list-group-item">
             <router-link to="/login">Logout</router-link>
