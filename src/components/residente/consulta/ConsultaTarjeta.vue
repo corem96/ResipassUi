@@ -23,8 +23,7 @@
 </template>
 
 <script>
-import { router } from '../../../router';
-import { servicioTarjeta } from '../../../servicios/usuario/ServicioTarjeta';
+import { servicioTarjeta } from '@/servicios/usuario/ServicioTarjeta';
 
 export default {
   data() {
@@ -41,7 +40,7 @@ export default {
               return formatted_date
           }},
           { key: 'activa', formatter: value => {
-              return value ? 'ACTIVA' : 'INACTIVA'
+              return value ? 'ACTIVA' : 'BLOQUEADA'
           }}],
       tarjetas: [],
       cargando: false,
