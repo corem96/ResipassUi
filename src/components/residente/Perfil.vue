@@ -10,7 +10,7 @@
             <router-link to="/consultatarjeta">Consulta tarjeta</router-link>
           </li>
           <li class="list-group-item">
-            Envío de comprobante de pago
+            <router-link to="/registropago">Registrar pago</router-link>
           </li>
           <li class="list-group-item">
             Reporte de pagos por anualidad
@@ -38,11 +38,10 @@ export default {
     };
   },
   created() {
-    this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (usuario) {
+      this.usuario = usuario;
+    }
   }
 }
 </script>
-
-<style>
-
-</style>
