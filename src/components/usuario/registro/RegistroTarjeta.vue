@@ -32,7 +32,7 @@
 
 <script>
 import ResidenteSelector from '@/components/residente/ResidenteSelector.vue'
-import { servicioTarjeta } from '../../../servicios/usuario/ServicioTarjeta'
+import { servicioTarjeta } from '@/servicios/usuario/ServicioTarjeta'
 
 export default {
   data() {
@@ -59,7 +59,6 @@ export default {
       }
     },
     _submit(datos) {
-      // console.log(servicioDomicilio);
       servicioTarjeta.registroTarjeta(datos)
         .then(resp => {
           if (!resp.error) {

@@ -33,7 +33,7 @@ export default {
       campos: [
           {key: 'id', label: '#'},
           'codigo',
-          { key: 'residenteNombreCompleto', label: 'Residente', class: 'largeColumn' },
+          { key: 'residenteNombreCompleto', label: 'Residente', class: 'extendido' },
           { key: 'vigencia', formatter: value => {
               let fecha = new Date(value)
               let formatted_date = `${fecha.getDay()}/${fecha.getMonth()}/${fecha.getFullYear()}`
@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style>
-.largeColumn {
-    width: 40%;
+.extendido {
+    width: 50%;
 }
 </style>

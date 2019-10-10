@@ -32,7 +32,6 @@ export default {
   methods: {
     setSelected(value) {
       this.residente = value;
-      // return value;
     }
   }
 }
