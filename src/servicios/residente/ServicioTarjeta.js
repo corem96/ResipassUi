@@ -19,7 +19,7 @@ async function obtenerTarjeta() {
 async function obtenerTarjetaResidente(residenteId) {
   try {
     const resp = await axios.get(`${residenteApi}/tarjeta-residente?residenteId=${residenteId}`);
-    if (resp) { return resp.data }
+    if (resp) { return resp.data; }
   } catch (error) {
     if (error.response) {
       const { data } = error.response;
@@ -28,4 +28,4 @@ async function obtenerTarjetaResidente(residenteId) {
   }
 }
 
-export const servicioResidente = { obtenerTarjeta, obtenerTarjetaResidente };
+export const servicioTarjeta = { obtenerTarjeta, obtenerTarjetaResidente };
