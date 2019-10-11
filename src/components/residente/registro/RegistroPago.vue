@@ -30,7 +30,7 @@
           </div>
           <div class="form-group">
             <label for="vigencia">Tarjeta</label>
-            <input type="text" class="form-control disabled" v-model="tarjeta.codigo" name="tarjeta" readonly>
+            <input type="text" class="form-control disabled" :value="tarjeta.codigo" name="tarjeta" readonly>
           </div>
           <div class="form-group col-md-12">
             <button type="submit" class="btn btn-info">Registrar pago</button>
@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import { servicioTarjeta } from '@/servicios/usuario/ServicioTarjeta'
+import { servicioPago } from '@/servicios/residente/ServicioPago'
+import { servicioTarjeta } from '@/servicios/residente/ServicioTarjeta';
 
 export default {
   data() {
@@ -61,59 +62,82 @@ export default {
       autorizacion: '',
       sucursal: '',
       cajero: '',
-      importe: 0.0,
-      usuarioId: 0
+      importe: 300.00,
+      usuarioId: 0,
+      tarjetaId: 0
     };
   },
   created() {
     const usuario = JSON.parse(localStorage.getItem('usuario'));
-    this.usuarioId = usuario.id;
-    console.log(this.usuarioId);
+    if (usuario) {
+      this.usuarioId = usuario.id;
+
+      this.obtieneTarjeta();
+    }
   },
   methods: {
     registroPago() {
       if(this.validaForm()) {
         let registroPago = {
+          numeroFolio: this.folio,
+          numeroAutorizacion: this.autorizacion,
+          sucursal: this.sucursal,
+          cajero: this.cajero,
+          importe: this.importe,
+          residenteId: this.usuarioId,
+          tarjetaId: this.tarjetaId 
         };
-        this._submit(tarjeta);
+        this._submit(registroPago);
       }
     },
     _submit(datos) {
-      // servicioTarjeta.registroTarjeta(datos)
-      //   .then(resp => {
-      //     if (!resp.error) {
-      //       this.success = 'Tarjeta registrada';
-      //     } else {
-      //       this.errors.push(resp.error);
-      //     }
-      //   });
+      servicioPago.registroPago(datos)
+        .then(resp => {
+          if (!resp.error) {
+            this.success = 'Pago registrado';
+          } else {
+            this.errors.push(resp.error);
+          }
+        });
     },
     obtieneTarjeta() {
+      const me = this;
       servicioTarjeta.obtenerTarjetaResidente(this.usuarioId)
         .then(resp => {
           if (!resp.error) {
-            this.tarjeta = resp;
+            if (resp) {
+              me.tarjeta = resp;
+              me.tarjetaId = me.tarjeta.id;
+            }
           } else {
-            this.errors.push(resp.error);
+            me.errors.push(resp.error);
           }
         });
     },
     validaForm() {
       this.errors = [];
       this.success = '';
-      // if (this.codigo == '') {
-      //   this.errors.push('debe escribir un código válido');
-      // }
-      // if (this.vigencia == '') {
-      //   this.errors.push('debe escribir una vigencia válida');
-      // }
-      // if (this.$children[0].residenteId == '') {
-      //   this.errors.push('debe seleccionar un residente');
-      // }
-      // if (this.errors.length > 0) {
-      //   return false;
-      // }
-      // this.residenteId = this.$children[0].residenteId;
+      if (this.tarjetaId <= 0) {
+        this.errors.push('debe tener una tarjeta asociada');
+      }
+      if (this.folio === '') {
+        this.errors.push('debe escribir un número de folio válido');
+      }
+      if (this.autorizacion === '') {
+        this.errors.push('debe escribir un npumero de autorización válido');
+      }
+      if (this.sucursal === '') {
+        this.errors.push('debe escribir una sucursal válida');
+      }
+      if (this.cajero === '') {
+        this.errors.push('debe escribir una cajero válido');
+      }
+      if (this.importe <= 0) {
+        this.errors.push('debe escribir un importe válio');
+      }
+      if (this.errors.length > 0) {
+        return false;
+      }
       return true;
     }
   }  
