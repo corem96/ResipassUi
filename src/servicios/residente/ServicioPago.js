@@ -16,4 +16,16 @@ async function registroPago(datosPago) {
   }
 }
 
-export const servicioPago = { registroPago };
+async function consultaPagos(residenteId) {
+  try {
+    const resp = await axios.get(`${registroPagoApi}/reporte-pagos?residenteId=${residenteId}`);
+    if (resp) { return resp.data; }
+  } catch (error) {
+    if (error.response) {
+      const { data } = error.response;
+      return { error: `Ocurrió un error al intentar obtener los datos: ${data}`};
+    }
+  }
+}
+
+export const servicioPago = { registroPago, consultaPagos };
