@@ -11,6 +11,7 @@ import PerfilResidente from '@/components/residente/Perfil.vue';
 import ConsultaTarjeta from '@/components/residente/consulta/ConsultaTarjeta.vue';
 import ConsultaAviso from '@/components/residente/consulta/ConsultaAviso.vue';
 import RegistroPago from '@/components/residente/registro/RegistroPago.vue';
+import ConsultaPagos from '@/components/residente/consulta/ConsultaPagos.vue';
 
 Vue.use(Router);
 
@@ -49,6 +50,10 @@ export const router = new Router({
         {
           path: '/registro-pago',
           component: RegistroPago
+        },
+        {
+          path: '/reporte-pagos',
+          component: ConsultaPagos
         }
       ]
     }
