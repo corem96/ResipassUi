@@ -16,7 +16,7 @@
             <router-link to="/reporte-pagos">Reporte de pagos</router-link>
           </li>
           <li class="list-group-item">
-            <router-link to="/consultaaviso">Consultar avisos/comunicados</router-link>
+            <router-link to="/consulta-aviso">Consultar avisos/comunicados</router-link>
           </li>
           <li class="list-group-item">
             <router-link to="/login">Logout</router-link>
