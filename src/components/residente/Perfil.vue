@@ -7,13 +7,13 @@
       <div class="col-md-3">
         <ul class="list-group pull-right">
           <li class="list-group-item">
-            <router-link to="/consultatarjeta">Consulta tarjeta</router-link>
+            <router-link to="/consulta-tarjeta">Consulta tarjeta</router-link>
           </li>
           <li class="list-group-item">
-            <router-link to="/registropago">Registrar pago</router-link>
+            <router-link to="/registro-pago">Registrar pago</router-link>
           </li>
           <li class="list-group-item">
-            Reporte de pagos por anualidad
+            <router-link to="/reporte-pagos">Reporte de pagos</router-link>
           </li>
           <li class="list-group-item">
             <router-link to="/consultaaviso">Consultar avisos/comunicados</router-link>

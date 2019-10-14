@@ -39,15 +39,15 @@ export const router = new Router({
     { path: '/residente', component: PerfilResidente,
       children: [
         {
-          path: '/consultatarjeta',
+          path: '/consulta-tarjeta',
           component: ConsultaTarjeta
         },
         {
-          path: '/consultaaviso',
+          path: '/consulta-aviso',
           component: ConsultaAviso
         },
         {
-          path: '/registropago',
+          path: '/registro-pago',
           component: RegistroPago
         }
       ]
@@ -58,12 +58,16 @@ export const router = new Router({
 router.beforeEach((to, from, next) => {
   const login = ['/login'];
   const auth = !login.includes(to.path);
-  const logeado = localStorage.getItem('usuario');
+  const usuario = JSON.parse(localStorage.getItem('usuario'));
 
-  if (auth && !logeado) {
+  if(to.path == '/home') {
     return next({
-      path: '/login',
+      path: usuario.esUsuarioAdmin ? '/usuario' : '/residente'
     });
+  }
+
+  if (auth && !usuario) {
+    return next({ path: '/login', });
   }
 
   next();
