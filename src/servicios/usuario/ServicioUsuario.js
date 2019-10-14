@@ -9,6 +9,9 @@ async function login(datosLogin) {
     const resp = await axios.post(loginApi, datosLogin);
     if (resp) {
       const usuario = resp.data;
+      if (datosLogin.esUsuarioAdmin) {
+        usuario.esUsuarioAdmin = datosLogin.esUsuarioAdmin;
+      }
       localStorage.setItem('usuario', JSON.stringify(usuario));
       return usuario;
     }
