@@ -28,10 +28,16 @@ export default {
       success: '',
       campos: [
           { key: 'id', label: '#' },
-          { key: 'fechaPago', label: 'Fecha pago' },
-          { key: 'fechaVencimiento', label: 'Fecha vencimiento' },
+          { key: 'fechaPago', formatter: value => {
+              let fecha = new Date(value)
+              let formatted_date = `${fecha.getDay()}/${fecha.getMonth()}/${fecha.getFullYear()}`
+              return formatted_date }, label: 'Fecha pago' },
+          { key: 'fechaVencimiento', formatter: value => {
+              let fecha = new Date(value)
+              let formatted_date = `${fecha.getDay()}/${fecha.getMonth()}/${fecha.getFullYear()}`
+              return formatted_date }, label: 'Fecha vencimiento' },
           { key: 'tarjetaCodigo', label: 'Codigo tarjeta' },
-          { key: 'importe', label: 'Importe' }
+          { key: 'importe', formatter: value => {return `$ ${value}`} , label: 'Importe' }
       ],
       pagos: [],
       usuarioId: 0,
