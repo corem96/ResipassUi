@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { servicioTarjeta } from '@/servicios/usuario/ServicioTarjeta';
+import { servicioTarjeta } from '@/servicios/residente/ServicioTarjeta';
 
 export default {
   data() {
@@ -44,17 +44,30 @@ export default {
           }}],
       tarjetas: [],
       cargando: false,
+      usuarioId: 0
     };
   },
   created() {
-    servicioTarjeta.obtenerTarjetas()
-      .then(resp => {
-        if (!resp.error) {
-            this.tarjetas = resp;
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (usuario) {
+      this.usuarioId = usuario.id;
+      this.obtieneTarjeta();
+    }
+  },
+  methods: {
+    obtieneTarjeta() {
+      const me = this;
+      servicioTarjeta.obtenerTarjetaResidente(this.usuarioId)
+        .then(resp => {
+          if (!resp.error) {
+            if (resp) {
+              me.tarjetas.push(resp);
+            }
           } else {
-            this.errors.push(resp.error);
+            me.errors.push(resp.error);
           }
-      });
+        });
+    }
   }
 }
 </script>
