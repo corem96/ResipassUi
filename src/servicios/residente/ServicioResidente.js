@@ -16,4 +16,16 @@ async function obtenerResidentes() {
   }
 }
 
-export const servicioResidente = { obtenerResidentes };
+async function registroResidente(datos) {
+  try {
+    const resp = await axios.post(residenteApi, datos);
+    if (resp) { return resp.data; }
+  } catch (error) {
+    if (error.response) {
+      const { data } = error.response;
+      return { error: `Ocurrió un error al intentar obtener los datos: ${data}`};
+    }
+  }
+}
+
+export const servicioResidente = { obtenerResidentes, registroResidente };
