@@ -17,11 +17,15 @@
           </div>
           <div class="form-group">
             <label for="numero">Contraseña</label>
-            <input type="text" class="form-control" v-model="password" name="password" id="password">
+            <input type="password" class="form-control" v-model="password" name="password" id="password">
           </div>
           <div class="form-group">
             <label for="numero">Confirmar Contraseña</label>
-            <input type="text" class="form-control" v-model="passwordConfirm" name="passwordConfirm" id="passwordConfirm">
+            <input type="password" class="form-control" v-model="passwordConfirm" name="passwordConfirm" id="passwordConfirm">
+          </div>
+          <div class="form-group">
+            <label for="domicilio">Domicilio</label>
+            <DomicilioSelector :value="domicilioId"/>
           </div>
           <div class="form-group col-md-12">
             <button type="submit" class="btn btn-info">Registrar</button>
@@ -41,19 +45,24 @@
 
 <script>
 import { router } from '@/router';
-import { servicioResidente } from '@/servicios/ServicioResidente';
+import { servicioResidente } from '@/servicios/residente/ServicioResidente';
+import DomicilioSelector from '@/components/residente/DomicilioSelector';
 
 export default {
   data() {
     return {
       errors: [],
       success: '',
+      domicilioId: 0,
       nombre: '',
       apellido: '',
       nombreUsuario: '',
       password: '',
       passwordConfirm: ''
     };
+  },
+  components: {
+    DomicilioSelector
   },
   methods: {
     registroDom() {
@@ -62,16 +71,19 @@ export default {
           nombre: this.nombre,
           apellido: this.apellido,
           nombreUsuario: this.nombreUsuario,
-          password: this.password
+          password: this.password,
+          passwordConfirm: this.passwordConfirm,
+          domicilioId: this.$children[0].domicilioId
         };
+        console.log(residente);
         this._submit(residente);
       }
     },
     _submit(datos) {
-      servicioUsuario.registroResidente(datos)
+      servicioResidente.registroResidente(datos)
         .then(resp => {
           if (!resp.error) {
-            this.success = 'Residente registrado';
+            this.$router.push({path: '/residente'});
           } else {
             this.errors.push(resp.error);
           }
@@ -80,24 +92,27 @@ export default {
     validaForm() {
       this.errors = [];
       this.success = '';
-      if (this.nombre == '') {
-        this.errors.push('debe escribir una nombre válida');
+      if (this.nombre === '') {
+        this.errors.push('debe escribir una nombre válido');
       }
-      if (this.apellido == '') {
+      if (this.apellido === '') {
         this.errors.push('debe escribir un apellido válido');
       }
-      if (this.nombreUsuario == '') {
+      if (this.nombreUsuario === '') {
         this.errors.push('debe escribir un nombre de usuario válido');
       }
-      if (this.password == '') {
+      if (this.password === '') {
         this.errors.push('debe escribir un pasword válido');
       }
-      if (this.passwordConfirm == '') {
+      if (this.passwordConfirm === '') {
         this.errors.push('debe confirmar el password');
-        if (this.password != '' && this.password !== this.passwordConfirm) {
-          const errorMsj = 'el password y la confirmación no coinciden, por favor revise de nuevo';
-          this.errors.push(errorMsj);
-        }
+      }
+      if (this.password !== this.passwordConfirm) {
+        const errorMsj = 'el password y la confirmación no coinciden, por favor revise de nuevo';
+        this.errors.push(errorMsj);
+      }
+      if (this.$children[0].domicilioId == '') {
+        this.errors.push('debe seleccionar un domicilio');
       }
       if (this.errors.length > 0) {
         return false;
@@ -107,7 +122,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
