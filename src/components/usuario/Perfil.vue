@@ -7,16 +7,17 @@
       <div class="col-md-3">
         <ul class="list-group pull-right">
           <li class="list-group-item">
-            <router-link to="/registrodom">Registrar domicilio</router-link>
+            <router-link to="/registro-dom">Registrar domicilio</router-link>
           </li>
           <li class="list-group-item">
-            <router-link to="/registrotar">Registrar tarjeta</router-link>
+            <router-link to="/registro-tarjeta">Registrar tarjeta</router-link>
           </li>
           <li class="list-group-item">
-            <router-link to="/registroaviso">Registrar aviso</router-link>
+            <router-link to="/registro-aviso">Registrar aviso</router-link>
           </li>
-          <li class="list-group-item">Cobranza</li>
-          <li class="list-group-item">Enviar recordatorio</li>
+          <li class="list-group-item">
+            <router-link to="/cobranza">Cobranza</router-link>
+          </li>
           <li class="list-group-item">
             <router-link to="/login">Logout</router-link>
           </li>
